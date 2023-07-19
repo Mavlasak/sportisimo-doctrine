@@ -1,0 +1,53 @@
+{layout '../@layout.latte'}
+
+{block title}Značky{/block}
+
+{block content}
+<a class="waves-effect waves-light btn" n:href="Trademark:new">Přidat značku</a>
+<br/>
+
+<table>
+    <thead>
+    <tr>
+        <th>
+            Název
+            <a n:href="index, 1, true, $itemPerPage"><i class="material-icons">arrow_downward</i></a>
+            <a n:href="index, 1, false, $itemPerPage"><i class="material-icons">arrow_upward</i></a>
+        </th>
+        <th style="text-align: left">Akce</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $trademarks as $trademark}
+    <tr>
+        <td>{$trademark->getName()}</td>
+        <td><a n:href="edit $trademark->getId()">Editovat</a> <a n:href="Trademark:delete $trademark->getId()">Smazat</a></td>
+    </tr>
+    {/foreach}
+    </tbody>
+</table>
+
+<div class="pagination">
+    {if !$paginator->isFirst()}
+    <a n:href="index, 1, $desc, $itemPerPage">První</a>
+    &nbsp;|&nbsp;
+    <a n:href="index, $paginator->page-1, $desc, $itemPerPage">Předchozí</a>
+    &nbsp;|&nbsp;
+    {/if}
+
+    Stránka {$paginator->getPage()} z {$paginator->getPageCount()}
+
+    {if !$paginator->isLast()}
+    &nbsp;|&nbsp;
+    <a n:href="index, $paginator->getPage() + 1, $desc, $itemPerPage">Další</a>
+    &nbsp;|&nbsp;
+    <a n:href="index, $paginator->getPageCount(), $desc, $itemPerPage">Poslední</a>
+    {/if}
+</div>
+
+</div>
+    {for $i = App\Presenters\TrademarkPresenter::ITEM_PER_PAGE_STEP; $i <= min(App\Presenters\TrademarkPresenter::MAX_ITEM_PER_PAGE, $trademarksCount); $i+=App\Presenters\TrademarkPresenter::ITEM_PER_PAGE_STEP}
+        <a n:href="index, 1, $desc, $i">{$i}</a>
+    {/for}
+<div>
+{/block}

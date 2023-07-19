@@ -1,0 +1,17 @@
+parameters:
+	doctrine:
+		host: '127.0.0.1:3306'
+		password: 'Martin123_'
+		user: 'root'
+		dbname: 'testnette2'
+
+database:
+	dsn: 'mysql:=127.0.0.1:3306;dbname=testnette2'
+	user: 'root'
+	password: 'Martin123_'
+
+extensions:
+    console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+
+includes:
+    - doctrine.neon

@@ -1,0 +1,17 @@
+search:
+	-
+		in: %appDir%
+		classes:
+			- *Factory
+			- *Facade
+			- *Service
+			- *Repository
+
+services:
+	- App\Router\RouterFactory::createRouter
+	- App\Model\Trademark\TrademarkService
+	- App\Model\Trademark\TrademarkRepository
+	- App\Model\Trademark\Form\NewTrademarkFormFactory
+	- App\Model\Trademark\Form\EditTrademarkFormFactory
+	- App\Model\Paginator\PaginatorFactory
+	- App\Forms\DeleteFormFactory
