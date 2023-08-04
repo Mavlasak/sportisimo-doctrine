@@ -66,7 +66,8 @@ final class TrademarkPresenter extends Nette\Application\UI\Presenter
 
     protected function createComponentEditTrademarkForm(): EditTrademarkFormControl
     {
-        $control = $this->editTrademarkFormFactory->create($this->trademark);
+        $formData = new EditTrademarkFormData($this->trademark->getName());
+        $control = $this->editTrademarkFormFactory->create($formData);
         $control->onSave[] = function (EditTrademarkFormData $data): void
         {
             try {

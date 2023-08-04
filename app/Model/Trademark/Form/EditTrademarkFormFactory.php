@@ -2,9 +2,7 @@
 
 namespace App\Model\Trademark\Form;
 
-use App\Entity\Trademark;
-
 interface EditTrademarkFormFactory
 {
-    function create(Trademark $trademark): EditTrademarkFormControl;
+    function create(EditTrademarkFormData $formData): EditTrademarkFormControl;
 }

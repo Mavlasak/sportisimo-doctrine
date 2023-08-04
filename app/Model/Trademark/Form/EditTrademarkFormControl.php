@@ -2,19 +2,18 @@
 
 namespace App\Model\Trademark\Form;
 
-use App\Entity\Trademark;
 use Nette\Application\UI\Form;
 use Nette\Application\UI\Control;
 
 class EditTrademarkFormControl extends Control
 {
     public array $onSave = [];
-    private Trademark $trademark;
+    private EditTrademarkFormData $formData;
 
     public function __construct(
-        Trademark $trademark,
+        EditTrademarkFormData $formData,
     ) {
-        $this->trademark = $trademark;
+        $this->formData = $formData;
     }
 
     protected function createComponentEditForm(): Form
@@ -23,9 +22,7 @@ class EditTrademarkFormControl extends Control
         $form->addText('name', 'Značka:');
         $form->addSubmit('send', 'Odeslat');
         $form->onSuccess[] = [$this, 'processForm'];
-        $form->setDefaults([
-            'name' => $this->trademark->getName(),
-        ]);
+        $form->setDefaults($this->formData->toArray());
 
         return $form;
     }
